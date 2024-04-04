@@ -1,11 +1,31 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="/stylesheets/index.css" type="text/css" />
   </head>
+
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+    
+    <div class="background"></div>
+
+    <div class="container">
+      <button class="button" type="button" style="vertical-align:middle" onclick="linkToNextPage()">
+        <table>
+          <tr>
+            <td id="f-line">LICK IT NOW</td>
+          </tr>
+          <tr>
+            <td id="s-line"><span>TOUCH HERE</span></td>
+          </tr>
+        </table>
+      </button>
+    </div>
+
   </body>
+
+  <script src="/javascripts/index.js"></script>
+
 </html>

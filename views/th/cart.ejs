@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>
+    <%= title %>
+  </title>
+  <link rel="stylesheet" href="/stylesheets/th/cart.css" type="text/css" />
+</head>
+
+<body>
+  <div class="header-container">
+    <a href="/th"><img id="logo" src="/images/home/LOGO-white.png" alt="" /></a>
+    <!-- <a href="/th/order/cart">
+      <div class="button-container" id="cart">
+        <button class="button3">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" stroke-linejoin="round" stroke-linecap="round" viewBox="0 0 24 24" stroke-width="2" fill="none" stroke="currentColor" class="icon">
+          <circle r="1" cy="21" cx="9"></circle>
+          <circle r="1" cy="21" cx="20"></circle>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+        </svg>
+        </button>
+      </div>
+    </a> -->
+    <a href="/en/order/cart" id="lang" >TH</a>
+  </div>
+
+  <table id="nav">
+    <tr>
+      <td>Order Summary</td>
+    </tr>
+  </table>
+
+  <table class="total">
+    <tr>
+        <% if(cartItems.length > 1) { %> 
+          <td>>> <%= cartItems.length %> Items In Cart!</td> 
+        <% } else { %>
+          <td>>> <%= cartItems.length %> Item In Cart!</td> 
+        <% } %>
+    </tr>
+  </table>
+
+  <!-- <p class="horizontal-line"></p> -->
+
+  <table class="summary">
+    <% var totalPrice = 0 %>
+
+  <!--------------------- Flavor Section --------------------->
+
+  <% for(var i = 0; i < cartItems.length; i++) { %>
+    <% var unitPrice = 0 %>
+
+    <!-- Flavor Header Section -->
+    <form method="post" action="cart/delete">
+      <tr>
+        <td class="small">
+          <input type="hidden" name="deleteIndex" value="<%= i+1 %>">
+          <p>#<%= i+1 %></p>
+        </td>
+        <td>
+          <p>Flavor</p>
+        </td>
+        <td class="small">
+          <button class="delete" type="submit">
+            <svg viewBox="0 0 448 512" class="svgIcon"><path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"></path></svg>
+          </button>
+        </td>
+      </tr>
+    </form>
+
+    <!-- Flavor Details -->
+    <% for(var j = 0; j < flavors.length; j++) { %>
+
+      <% var flavorIndex = 'flavor_' + (j+1) %>
+
+      <% if(cartItems[i][flavorIndex] != 0) { %>
+        <tr>
+          <td></td>
+          <td class="detail">
+            <p>- <%= flavors[j].flavor_nameTH %> </p>
+          </td>
+          <td class="small" id="count">
+            <p>x <%= cartItems[i][flavorIndex] %></p>
+            <% totalPrice += flavors[j].flavor_price * cartItems[i][flavorIndex] %>
+            <% unitPrice += flavors[j].flavor_price * cartItems[i][flavorIndex] %>
+          </td>
+        </tr>
+       <% } %>
+
+    <% } %>
+
+  <!------------------------------------------------------------>
+
+
+  <!--------------------- Topping Section ---------------------->
+
+    <!-- Topping Header Section -->
+      <tr>
+        <td></td>
+        <td colspan="2">
+          <p>Topping</p>
+        </td>
+      </tr>
+
+    <!-- Topping Details -->
+      <% for(var j = 0; j < toppings.length; j++) { %>
+
+        <% var toppingIndex = 'topping_' + (j+1) %>
+
+        <% if(cartItems[i][toppingIndex] === "on") { %>
+          <tr>
+            <td></td>
+            <td class="detail">
+              <p>- <%= toppings[j].topping_nameTH %></p>
+            </td>
+            <td class="small" id="count">
+              <p>x 1</p>
+              <% totalPrice += toppings[j].topping_price %>
+              <% unitPrice += toppings[j].topping_price %>
+            </td>
+          </tr>
+        <% } %>
+
+      <% } %>
+
+      <!--------------------------------------------------------->
+
+      <!--------------------- Sauce Section --------------------->
+      
+        <!-- Sauce Header Section -->
+        <tr>
+          <td></td>
+          <td colspan="2">
+            <p>Sauce</p>
+          </td>
+        </tr>
+
+        <!-- Sauce Details -->
+        <% for(var j = 0; j < sauces.length; j++) { %>
+
+          <% var sauceIndex = 'sauce_' + (j+1) %>
+  
+          <% if(cartItems[i][sauceIndex] === "on") { %>
+            <tr>
+              <td></td>
+              <td class="detail">
+                <p>- <%= sauces[j].sauce_nameTH %> </p>
+              </td>
+              <td class="small" id="count">
+                <p>x 1</p>
+                <% totalPrice += sauces[j].sauce_price %>
+                <% unitPrice += sauces[j].sauce_price %>
+              </td>
+            </tr>        
+          <% } %>
+  
+        <% } %>
+
+      <!--------------------------------------------------------->
+      
+      <!--------------------- Package Section --------------------->
+
+        <!-- Package Header Section -->
+        <tr>
+          <td></td>
+          <td colspan="2">
+            <p>Packaging</p>
+          </td>
+        </tr>
+
+         <!-- Package Details -->
+         <% for(var j = 0; j < packages.length; j++) { %>
+
+          <% var packageIndex = 'package_' + (j+1) %>
+  
+          <% if(cartItems[i][packageIndex] === "on") { %>
+            <tr>
+              <td></td>
+              <td class="detail">
+                <p>- <%= packages[j].package_nameTH %> </p>
+              </td>
+              <td class="small" id="count">
+                <p>x 1</p>
+                <% totalPrice += packages[j].package_price %>
+                <% unitPrice += packages[j].package_price %>
+              </td>
+            </tr>        
+          <% } %>
+  
+        <% } %>
+
+        <td colspan="3" id="separate-starting-ending"></td>
+
+        <tr>
+          <td colspan="3" class="unit-price">
+            Unit price: <%= unitPrice %> บาท
+          </td>
+        </tr>
+
+        <tr>
+          <td colspan="3">
+            <% if(i != cartItems.length - 1) { %>
+              <p id="separate-order-line"></p>
+            <% } %>
+          </td>
+        </tr>
+
+        <% if(i == cartItems.length - 1) { %>
+          <td colspan="3" id="separate-starting-ending"></td>
+        <% } %>
+
+  <% } %>
+
+
+
+  <!-- Total Price Section -->
+  <table class="total" id="total-price">
+    <!-- <p class="horizontal-line"></p> -->
+    <tr>
+      <td>Total</td>
+      <td class="medium"><%= totalPrice %> บาท</td>
+    </tr>
+  </table>
+  <!------------------------->
+
+
+  <!-- Footer button Element -->
+  <table>
+    <tr>
+      <td>
+        <button class="button" type="button" onclick="backPage()" style="vertical-align: middle">
+          BACK
+        </button>
+      </td>
+      <td id="buy-more">
+        <button class="button" type="button" style="vertical-align: middle">
+          BUY MORE
+        </button>
+      </td>
+      <td id="confirm">
+        <button class="button" type="button" onclick="confirmOrder()" style="vertical-align: middle">
+          CONFIRM ORDER
+        </button>
+      </td>
+    </tr>
+  </table>
+
+
+</body>
+
+<script src="/javascripts/th/cart.js"></script>
+
+</html>

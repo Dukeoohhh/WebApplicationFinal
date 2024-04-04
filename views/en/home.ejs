@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>
+    <%= title %>
+  </title>
+  <link rel="stylesheet" href="/stylesheets/en/home.css" type="text/css" />
+</head>
+
+<body>
+  <div class="header-container">
+    <a href="/en"><img id="logo" src="/images/home/LOGO-white.png" alt="" /></a>
+    <a href="/en/order/cart">
+      <div class="button-container" id="cart">
+        <button class="button3">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" stroke-linejoin="round" stroke-linecap="round" viewBox="0 0 24 24" stroke-width="2" fill="none" stroke="currentColor" class="icon">
+          <circle r="1" cy="21" cx="9"></circle>
+          <circle r="1" cy="21" cx="20"></circle>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+        </svg>
+        </button>
+      </div>
+    </a>
+    <a href="/th" id="lang" >EN</a>
+  </div>
+
+  <div class="container">
+    <img id="main-pic" src="/images/home/homecopy.jpg" alt="" />
+  </div>
+
+  <div class="ice">
+    <button class="button1" type="button" style="vertical-align: middle">
+      Without ice cream, there would be darkness and chaos.
+    </button>
+  </div>
+
+  <div class="container">
+    <img id="reccom" src="/images/home/recommend.png" alt="" />
+  </div>
+
+  <table>
+    <tr>
+      <td id="reccom-label">VANILLA FLAVOR</td>
+      <td id="reccom-label">COOKIE & CREAM FLAVOR</td>
+      <td id="reccom-label">CHOCOLATE FLAVOR</td>
+    </tr>
+
+    <tr>
+      <td>
+        <img class="section" src="/images/home/ic-vani.webp" alt="" />
+      </td>
+      <td>
+        <img class="section" src="/images/home/ic-cookievani.webp" alt="" />
+      </td>
+      <td>
+        <img class="section" src="/images/home/ic-choc.jpg" alt="" />
+      </td>
+    </tr>
+  </table>
+
+  <div class="footer">
+    <img id="foot" src="/images/home/home2copy.png" alt="" />
+  </div>
+
+  <div class="order">
+    <button class="button2" type="button" style="vertical-align: middle" onclick="goToOrder()">
+      ORDER NOW
+    </button>
+  </div>
+</body>
+
+<script src="/javascripts/en/home.js"></script>
+
+</html>
