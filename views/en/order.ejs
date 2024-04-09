@@ -30,6 +30,10 @@
   <table id="nav">
     <tr>
       <td>
+        <a class="nav-button" href="#packagePart">PACKAGES</a>
+      </td>
+      <td id="separate-nav"></td>
+      <td>
         <a class="nav-button" href="#flavorPart">FLAVORS</a>
       </td>
       <td id="separate-nav"></td>
@@ -40,15 +44,119 @@
       <td>
         <a class="nav-button" href="#saucePart">SAUCES</a>
       </td>
-      <td id="separate-nav"></td>
-      <td>
-        <a class="nav-button" href="#packagePart">PACKAGES</a>
-      </td>
     </tr>
   </table>
 
-  <form method="post" action="order/add-to-cart">
+  <section id="popAlert">
+    <aside>
+        <h3>Please choose your Package and Flavors!</h3>
+        <button type="button" onclick="togglePop()">Back</button>
+    </aside>
+  </section>
+
+  <form id="orderForm" method="post" action="order/add-to-cart">
     <!-- Fetching Flavor Tables Partition -->
+
+    <!-- Fetching Packages Tables Partition -->
+
+    <section id="packagePart">
+      adasd
+    </section>
+    <table class="elementHeader">
+      <tr>
+        <td>
+          <p class="horizontal-line"></p>
+        </td>
+        <td class="small">
+          <h1>PACKAGES</h1>
+        </td>
+        <td>
+          <p class="horizontal-line"></p>
+        </td>
+      </tr>
+      <tr>
+        <td id="elementHeader-mention" colspan="3">* Please select your package! *</td>
+      </tr>
+    </table>
+
+    <fieldset id="packageField">
+      <% for(var i=0; i < packages.length; i +=4) { %>
+        <table>
+          <tr>
+            <% for (var j=0; j < 4; j++) { %>
+
+              <% var check = 0 %>
+
+              <% if(i + j>= packages.length) { %>
+                <td></td>
+                <% continue; } %>
+
+                <% if(packages[i+j].package_status) { %>
+                  <td class="menu-box" id="menu-box-package-<%= i+j%>">
+                    <input type="checkbox" name="package_<%= i+j+1%>" id="package-<%= i+j%>"
+                      onclick="eventCheckboxPackage(id)" />
+                    <label for="package-<%= i+j%>">
+                      <table class="inner-menu-box">
+                        <tr>
+                          <td colspan="2">
+                            <img class="section" src="<%= packages[i+j].package_pic %>" alt="" />
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="2">
+                            <a class="name">
+                              <%= packages[i+j].package_nameEN %>
+                            </a>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="2">
+                            <a class="money">
+                              <%= packages[i+j].package_price %> Baht
+                            </a>
+                          </td>
+                        </tr>
+                      </table>
+                    </label>
+                  </td>
+                  <% } else { %>
+                    <td class="menu-box-not-ready" id="menu-box-package-not-ready-<%= i+j%>">
+                      <input type="checkbox" name="package_<%= i+j+1%>" id="package-<%= i+j%>"
+                        onclick="eventCheckboxPackage(id)" />
+                      <label for="package-<%= i+j%>">
+                        <table class="inner-menu-box">
+                          <tr>
+                            <td colspan="2">
+                              <img class="section" src="<%= packages[i+j].package_pic %>" alt="" />
+                            </td>
+                          </tr>
+                          <tr>
+                            <td colspan="2">
+                              <a class="name">
+                                <%= packages[i+j].package_nameEN %>
+                              </a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td colspan="2">
+                              <a class="money">
+                                ** Out of Stock! **
+                              </a>
+                            </td>
+                          </tr>
+                        </table>
+                      </label>
+                    </td>
+                  <% } %>
+
+                  <% if(j < 3) { %>
+                    <td id="split-box"></td>
+                    <% continue; } %>
+                <% } %>
+          </tr>
+        </table>
+        <% } %>
+    </fieldset>
 
     <section id="flavorPart">
       adad
@@ -67,10 +175,11 @@
         </td>
       </tr>
       <tr>
-        <td id="elementHeader-mention" colspan="3">* You can select limit at 3 balls! *</td>
+        <td id="elementHeader-mention" colspan="3">* You can select limit at 3 scoops! *</td>
       </tr>
     </table>
 
+   <fieldset id="flavorFiled">
     <% for(var i=0; i < flavors.length; i +=4) { %>
       <table>
         <tr>
@@ -78,6 +187,9 @@
             <% if(i + j>= flavors.length) { %>
               <td></td>
               <% continue; } %>
+
+              <% if(flavors[i+j].flavor_status) { %>
+
                 <td class="menu-box">
                   <table class="inner-menu-box">
                     <tr>
@@ -95,14 +207,14 @@
                     <tr>
                       <td>
                         <a class="money">
-                          <%= flavors[i+j].flavor_price %> Baht
+                          <%= flavors[i+j].flavor_price %> Baht / scoop
                         </a>
                       </td>
                       <td>
                         <button class="circle-button" type="button" id="remove-<%= i+j%>" onclick="remove(id)">
                           -
                         </button>
-                        <input id="field-<%= i+j%>" name="flavor_<%= i+j+1%>" value="0" readonly />
+                        <input id="field-<%= i+j%>" type="text" name="flavor_<%= i+j+1%>" value="0" readonly />
 
                         <button class="circle-button" type="button" id="add-<%= i+j%>" onclick="add(id)">
                           +
@@ -111,6 +223,36 @@
                     </tr>
                   </table>
                 </td>
+
+                <% } else { %>
+
+                  <td class="menu-box-not-ready">
+                    <table class="inner-menu-box">
+                      <tr>
+                        <td colspan="2">
+                          <img class="section" src="<%= flavors[i+j].flavor_pic %>" alt="" />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td colspan="2">
+                          <a class="name">
+                            <%= flavors[i+j].flavor_nameEN %>
+                          </a>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td colspan="2">
+                          <a class="money">
+                            ** Out of Stock! **
+                          </a>
+                          <input id="field-<%= i+j%>" type="hidden" name="flavor_<%= i+j+1%>" value="0" readonly />
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+
+                <% } %>
+
                 <% if(j < 3) { %>
                   <td id="split-box"></td>
                   <% continue; } %>
@@ -118,6 +260,7 @@
         </tr>
       </table>
       <% } %>
+   </fieldset>
 
         <!-- Fetching Toppings Tables Partition -->
 
@@ -138,53 +281,87 @@
             </td>
           </tr>
           <tr>
-            <td id="elementHeader-mention" colspan="3">* You can select limit at 3 Toppings! *</td>
+            <td id="elementHeader-mention" colspan="3">* You can select 0 - 3 Toppings! *</td>
           </tr>
         </table>
 
-        <% for(var i=0; i < toppings.length; i +=4) { %>
-          <table>
-            <tr>
-              <% for (var j=0; j < 4; j++) { %>
-                <% if(i + j>= toppings.length) { %>
-                  <td></td>
-                  <% continue; } %>
+          <% for(var i=0; i < toppings.length; i +=4) { %>
+            <table>
+              <tr>
+                <% for (var j=0; j < 4; j++) { %>
+                  <% if(i + j>= toppings.length) { %>
+                    <td></td>
+                    <% continue; } %>
 
-                    <td class="menu-box" id="menu-box-topping-<%= i+j%>">
-                      <input type="checkbox" name="topping_<%= i+j+1%>" id="topping-<%= i+j%>"
-                        onclick="eventCheckboxTopping(id)" />
-                      <label for="topping-<%= i+j%>">
-                        <table class="inner-menu-box">
-                          <tr>
-                            <td colspan="2">
-                              <img class="section" src="<%= toppings[i+j].topping_pic %>" alt="" />
-                            </td>
-                          </tr>
-                          <tr>
-                            <td colspan="2">
-                              <a class="name">
-                                <%= toppings[i+j].topping_nameEN %>
-                              </a>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td colspan="2">
-                              <a class="money">
-                                <%= toppings[i+j].topping_price %> Baht
-                              </a>
-                            </td>
-                          </tr>
-                        </table>
-                      </label>
-                    </td>
+                    <% if(toppings[i+j].topping_status) { %>
+  
+                      <td class="menu-box" id="menu-box-topping-<%= i+j%>">
+                        <input type="checkbox" name="topping_<%= i+j+1%>" id="topping-<%= i+j%>"
+                          onclick="eventCheckboxTopping(id)" />
+                        <label for="topping-<%= i+j%>">
+                          <table class="inner-menu-box">
+                            <tr>
+                              <td colspan="2">
+                                <img class="section" src="<%= toppings[i+j].topping_pic %>" alt="" />
+                              </td>
+                            </tr>
+                            <tr>
+                              <td colspan="2">
+                                <a class="name">
+                                  <%= toppings[i+j].topping_nameEN %>
+                                </a>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td colspan="2">
+                                <a class="money">
+                                  <%= toppings[i+j].topping_price %> Baht
+                                </a>
+                              </td>
+                            </tr>
+                          </table>
+                        </label>
+                      </td>
 
-                    <% if(j < 3) { %>
-                      <td id="split-box"></td>
-                      <% continue; } %>
-                        <% } %>
-            </tr>
-          </table>
-          <% } %>
+                      <% } else { %>
+                      
+                        <td class="menu-box-not-ready" id="menu-box-topping-not-ready-<%= i+j%>">
+                          <input type="checkbox" name="topping_<%= i+j+1%>" id="topping-<%= i+j%>"
+                            onclick="eventCheckboxTopping(id)" />
+                          <label for="topping-<%= i+j%>">
+                            <table class="inner-menu-box">
+                              <tr>
+                                <td colspan="2">
+                                  <img class="section" src="<%= toppings[i+j].topping_pic %>" alt="" />
+                                </td>
+                              </tr>
+                              <tr>
+                                <td colspan="2">
+                                  <a class="name">
+                                    <%= toppings[i+j].topping_nameEN %>
+                                  </a>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td colspan="2">
+                                  <a class="money">
+                                    ** Out of Stock! **
+                                  </a>
+                                </td>
+                              </tr>
+                            </table>
+                          </label>
+                        </td>
+
+                      <% } %>
+  
+                      <% if(j < 3) { %>
+                        <td id="split-box"></td>
+                        <% continue; } %>
+                          <% } %>
+              </tr>
+            </table>
+            <% } %>
 
             <!-- Fetching Sauces Tables Partition -->
 
@@ -204,127 +381,93 @@
                 </td>
               </tr>
               <tr>
-                <td id="elementHeader-mention" colspan="3">* You can select limit at 2 Sauces! *</td>
+                <td id="elementHeader-mention" colspan="3">* You can select 0 - 2 Sauces! *</td>
               </tr>
             </table>
 
-            <% for(var i=0; i < sauces.length; i +=4) { %>
-              <table>
-                <tr>
-                  <% for (var j=0; j < 4; j++) { %>
-                    <% if(i + j>= sauces.length) { %>
-                      <td></td>
-                      <% continue; } %>
-
-                        <td class="menu-box" id="menu-box-sauce-<%= i+j%>">
-                          <input type="checkbox" name="sauce_<%= i+j+1%>" id="sauce-<%= i+j%>"
-                            onclick="eventCheckboxSauce(id)" />
-                          <label for="sauce-<%= i+j%>">
-                            <table class="inner-menu-box">
-                              <tr>
-                                <td colspan="2">
-                                  <img class="section" src="<%= sauces[i+j].sauce_pic %>" alt="" />
-                                </td>
-                              </tr>
-                              <tr>
-                                <td colspan="2">
-                                  <a class="name">
-                                    <%= sauces[i+j].sauce_nameEN %>
-                                  </a>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td colspan="2">
-                                  <a class="money">
-                                    <%= sauces[i+j].sauce_price %> Baht
-                                  </a>
-                                </td>
-                              </tr>
-                            </table>
-                          </label>
-                        </td>
-
-                        <% if(j < 3) { %>
-                          <td id="split-box"></td>
-                          <% continue; } %>
-                            <% } %>
-                </tr>
-              </table>
-              <% } %>
-
-                <!-- Fetching Packages Tables Partition -->
-
-                <section id="packagePart">
-                  adasd
-                </section>
-                <table class="elementHeader">
+              <% for(var i=0; i < sauces.length; i +=4) { %>
+                <table>
                   <tr>
-                    <td>
-                      <p class="horizontal-line"></p>
-                    </td>
-                    <td class="small">
-                      <h1>PACKAGES</h1>
-                    </td>
-                    <td>
-                      <p class="horizontal-line"></p>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td id="elementHeader-mention" colspan="3">* You can select limit at 1 package! *</td>
-                  </tr>
-                </table>
+                    <% for (var j=0; j < 4; j++) { %>
+                      <% if(i + j>= sauces.length) { %>
+                        <td></td>
+                        <% continue; } %>
 
-                <% for(var i=0; i < packages.length; i +=4) { %>
-                  <table>
-                    <tr>
-                      <% for (var j=0; j < 4; j++) { %>
-                        <% if(i + j>= packages.length) { %>
-                          <td></td>
-                          <% continue; } %>
+                        <% if(sauces[i+j].sauce_status) { %>
+  
+                          <td class="menu-box" id="menu-box-sauce-<%= i+j%>">
+                            <input type="checkbox" name="sauce_<%= i+j+1%>" id="sauce-<%= i+j%>"
+                              onclick="eventCheckboxSauce(id)" />
+                            <label for="sauce-<%= i+j%>">
+                              <table class="inner-menu-box">
+                                <tr>
+                                  <td colspan="2">
+                                    <img class="section" src="<%= sauces[i+j].sauce_pic %>" alt="" />
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td colspan="2">
+                                    <a class="name">
+                                      <%= sauces[i+j].sauce_nameEN %>
+                                    </a>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td colspan="2">
+                                    <a class="money">
+                                      <%= sauces[i+j].sauce_price %> Baht
+                                    </a>
+                                  </td>
+                                </tr>
+                              </table>
+                            </label>
+                          </td>
 
-                            <td class="menu-box" id="menu-box-package-<%= i+j%>">
-                              <input type="checkbox" name="package_<%= i+j+1%>" id="package-<%= i+j%>"
-                                onclick="eventCheckboxPackage(id)" />
-                              <label for="package-<%= i+j%>">
+                          <% } else { %>
+                            <td class="menu-box-not-ready" id="menu-box-sauce-not-ready-<%= i+j%>">
+                              <input type="checkbox" name="sauce_<%= i+j+1%>" id="sauce-<%= i+j%>"
+                                onclick="eventCheckboxSauce(id)" />
+                              <label for="sauce-<%= i+j%>">
                                 <table class="inner-menu-box">
                                   <tr>
                                     <td colspan="2">
-                                      <img class="section" src="<%= packages[i+j].package_pic %>" alt="" />
+                                      <img class="section" src="<%= sauces[i+j].sauce_pic %>" alt="" />
                                     </td>
                                   </tr>
                                   <tr>
                                     <td colspan="2">
                                       <a class="name">
-                                        <%= packages[i+j].package_nameEN %>
+                                        <%= sauces[i+j].sauce_nameEN %>
                                       </a>
                                     </td>
                                   </tr>
                                   <tr>
                                     <td colspan="2">
                                       <a class="money">
-                                        <%= packages[i+j].package_price %> Baht
+                                        ** Out of Stock! **
                                       </a>
                                     </td>
                                   </tr>
                                 </table>
                               </label>
                             </td>
-
-                            <% if(j < 3) { %>
-                              <td id="split-box"></td>
-                              <% continue; } %>
-                                <% } %>
-                    </tr>
-                  </table>
-                  <% } %>
-
+                          <% } %>
+  
+                          <% if(j < 3) { %>
+                            <td id="split-box"></td>
+                            <% continue; } %>
+                              <% } %>
+                  </tr>
+                </table>
+                <% } %>
+              
                     <div id="submit-button">
-                      <button class="submit-button" type="submit" style="vertical-align:middle">
+                      <button class="submit-button" type="submit" onclick="selectedCheck()" style="vertical-align:middle">
                         ADD TO CART
                       </button>
                     </div>
   </form>
-</body>
+</body>>
 
 <script src="/javascripts/en/order.js"></script>
 

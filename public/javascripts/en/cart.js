@@ -3,5 +3,5 @@ function backPage(){
 }
 
 function confirmOrder(){
-    window.location.href = "/en/order/confirmOrder";
+    window.location.href = "/en/order/payment";
 }

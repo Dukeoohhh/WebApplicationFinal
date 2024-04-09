@@ -56,7 +56,7 @@ div.header-container a #logo{
   margin-right: 1%;
   text-align: center;
   font-weight: bold;
-  font-family: "IBM Plex Sans Thai";
+  font-family: 'BaskervilleDisplayPTRegular', serif;
   /* border: 1px solid black; */
 }
 
@@ -102,7 +102,36 @@ table {
   font-size: 1.25vw;
   position: sticky;
   top: 0;
+  z-index: 100;
   border-radius: 70px 70px 70px 70px;
+}
+
+.menu-box {
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 10%;
+  padding-bottom: 1%;
+}
+
+.menu-box-check {
+  background-color: #a6ff94;
+  border-radius: 10%;
+  padding-bottom: 1%;
+}
+
+.menu-box-not-ready{
+  background-color: rgba(151, 151, 151, 0.9);
+  border-radius: 10%;
+  padding-bottom: 1%;
+}
+
+.menu-box-not-ready img{
+  filter: grayscale(100%);
+  box-shadow:none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  -webkit-user-drag: none;
+  -webkit-touch-callout: none;
 }
 
 #separate-nav{
@@ -142,24 +171,6 @@ section{
   text-align: left;
 }
 
-.button {
-  background-color: rgb(255, 255, 255);
-  border: none;
-  color: #5b5247;
-  width: 50%;
-  padding: 10px 55px;
-  margin-top: 2%;
-  margin-bottom: 2%;
-  text-align: center;
-  text-decoration: none;
-  font-family: "IBM Plex Sans Thai";
-  border-radius: 25px;
-  cursor: pointer;
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  font-weight: bold;
-  font-size: 1.2vw;
-}
-
 .circle-button {
   width: 30px;
   height: 30px;
@@ -176,18 +187,6 @@ section{
   background-color: #984f4a;
 }
 
-.menu-box {
-  background-color: rgba(255, 255, 255, 0.9);
-  border-radius: 10%;
-  padding-bottom: 1%;
-}
-
-.menu-box-check {
-  background-color: #a6ff94;
-  border-radius: 10%;
-  padding-bottom: 1%;
-}
-
 #split-box{
   width: 1%;
 }
@@ -197,6 +196,9 @@ section{
   /* border: 1px solid black; */
 }
 
+fieldset {
+  border: none;
+}
 
 .inner-menu-box input {
   width: 45%;
@@ -319,3 +321,74 @@ h1 {
   background-color: #B7A17E;
 }
 
+section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "IBM Plex Sans Thai";
+}
+
+section#popAlert {
+  position: fixed;
+  top: -100%;
+  left: 0;
+  right: 0;
+  height: 100vh;
+  z-index: 20;
+  background-color: rgba(255, 255, 255, 0);
+  transition: 0.3s top cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    0.1s background-color linear 0s;
+  font-family: "IBM Plex Sans Thai";
+}
+
+section#popAlert.active {
+  top: 0;
+  background-color: rgba(85, 85, 85, 0.61);
+
+  transition: 0.3s top cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    0.6s background-color linear 0.3s;
+}
+
+section#popAlert aside {
+  width: 90%;
+  max-width: 350px;
+  text-align: center;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.6);
+  font-family: "IBM Plex Sans Thai";
+}
+
+section#popAlert aside h3 {
+  font-size: 20px;
+  color: #ee2b2b;
+  font-family: "IBM Plex Sans Thai";
+}
+
+section#popAlert aside p {
+  font-size: 16px;
+  margin: 5px 0;
+  font-family: "IBM Plex Sans Thai";
+}
+
+section#popAlert aside button[type="button"] {
+  width: 100px;
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 15px;
+  border: none;
+  border-radius: 3px;
+  padding: 5px 0;
+  cursor: pointer;
+  background-color: #e5e5e5;
+  transition: 0.3s all ease-in-out;
+  font-family: "IBM Plex Sans Thai";
+}
+
+section#popAlert aside button[type="button"]:hover {
+  background-color: #ee2b2b;
+  color: #fff;
+  font-family: "IBM Plex Sans Thai";
+}

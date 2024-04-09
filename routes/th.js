@@ -68,7 +68,7 @@ router.post("/order/add-to-cart", (req, res, err) => {
 
   // Redirect back to the page where the item was added
   // res.send(req.session.cart);
-  res.redirect("back");
+  res.redirect("http://localhost:3000/th/order/cart");
 });
 
 // Route to display the items in the cart
@@ -143,8 +143,40 @@ router.post("/order/cart/delete", (req, res) => {
 
 });
 
-router.get("/order/confirmOrder", (req, res) => {
+router.post("/order/cart/confirm-order", (req, res) => {
+  const item = req.body;
+
+  req.session.totalPay = item;
+
+  res.redirect("http://localhost:3000/th/order/payment");
+});
+
+router.get("/order/payment", (req, res) => {
   res.render('th/payment', {title: "Payment"});
+});
+
+router.get("/order/payment/cash", (req, res) => {
+  const totalPay = req.session.totalPay;
+
+  res.render('th/paymentList/cash', {title: "Pay with cash", totalPay: totalPay});
+});
+
+router.get("/order/payment/qrcode", (req, res) => {
+  const totalPay = req.session.totalPay;
+
+  res.render('th/paymentList/qrcode', {title: "Pay with qrcode", totalPay: totalPay});
+});
+
+router.get("/order/payment/point", (req, res) => {
+  const totalPay = req.session.totalPay;
+
+  res.render('th/paymentList/point', {title: "Pay with truemoney", totalPay: totalPay});
+});
+
+router.get("/order/collectpoint", (req, res) => {
+  const totalPay = req.session.totalPay;
+
+  res.render('th/collectpoint', {title: "Collecting point", totalPay: totalPay});
 });
 
 module.exports = router;

@@ -1,81 +1,232 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%= title %></title>
-    <link rel="stylesheet" href="/stylesheets/th/order.css" type="text/css" />
-  </head>
 
-  <body>
-    <div class="header-container">
-      <a href="/th"><img id="logo" src="/images/home/LOGO-white.png" alt="" /></a>
-      <a href="/th/order/cart">
-        <div class="button-container" id="cart">
-          <button class="button2">
-          <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" stroke-linejoin="round" stroke-linecap="round" viewBox="0 0 24 24" stroke-width="2" fill="none" stroke="currentColor" class="icon">
-            <circle r="1" cy="21" cx="9"></circle>
-            <circle r="1" cy="21" cx="20"></circle>
-            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-          </svg>
-          </button>
-        </div>
-      </a>
-      <a href="/en/order" id="lang" >TH</a>
-    </div>
-  
-    <table id="nav">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>
+    <%= title %>
+  </title>
+  <link rel="stylesheet" href="/stylesheets/th/order.css" type="text/css" />
+</head>
+
+<body>
+  <div class="header-container">
+    <a href="/th"><img id="logo" src="/images/home/LOGO-white.png" alt="" /></a>
+    <a href="/th/order/cart">
+      <div class="button-container" id="cart">
+        <button class="button2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" stroke-linejoin="round" stroke-linecap="round" viewBox="0 0 24 24" stroke-width="2" fill="none" stroke="currentColor" class="icon">
+          <circle r="1" cy="21" cx="9"></circle>
+          <circle r="1" cy="21" cx="20"></circle>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+        </svg>
+        </button>
+      </div>
+    </a>
+    <a href="/en/order" id="lang" >TH</a>
+  </div>
+
+  <table id="nav">
+    <tr>
+      <td>
+        <a class="nav-button" href="#packagePart">บรรจุภัณฑ์</a>
+      </td>
+      <td id="separate-nav"></td>
+      <td>
+        <a class="nav-button" href="#flavorPart">รสชาติ</a>
+      </td>
+      <td id="separate-nav"></td>
+      <td>
+        <a class="nav-button" href="#toppingPart">ท็อปปิ้ง</a>
+      </td>
+      <td id="separate-nav"></td>
+      <td>
+        <a class="nav-button" href="#saucePart">ซอส</a>
+      </td>
+    </tr>
+  </table>
+
+  <section id="popAlert">
+    <aside>
+        <h3>โปรดเลือกบรรจุภัณฑ์ และ <br> รสชาติที่คุณต้องการก่อน!</h3>
+        <button type="button" onclick="togglePop()">ย้อนกลับ</button>
+    </aside>
+  </section>
+
+  <form id="orderForm" method="post" action="order/add-to-cart">
+    <!-- Fetching Flavor Tables Partition -->
+
+    <!-- Fetching Packages Tables Partition -->
+
+    <section id="packagePart">
+      adasd
+    </section>
+    <table class="elementHeader">
       <tr>
         <td>
-          <a class="nav-button" href="#flavorPart">รสชาติ</a>
+          <p class="horizontal-line"></p>
         </td>
-        <td id="separate-nav"></td>
-        <td>
-          <a class="nav-button" href="#toppingPart">ท็อปปิ้ง</a>
+        <td class="small">
+          <h1>บรรจุภัณฑ์</h1>
         </td>
-        <td id="separate-nav"></td>
         <td>
-          <a class="nav-button" href="#saucePart">ซอส</a>
-        </td>
-        <td id="separate-nav"></td>
-        <td>
-          <a class="nav-button" href="#packagePart">บรรจุภัณฑ์</a>
+          <p class="horizontal-line"></p>
         </td>
       </tr>
+      <tr>
+        <td id="elementHeader-mention" colspan="3">* โปรดเลือกบรรจุภัณฑ์ของคุณ! *</td>
+      </tr>
     </table>
-  
-    <form method="post" action="order/add-to-cart">
-      <!-- Fetching Flavor Tables Partition -->
-  
-      <section id="flavorPart">
-        adad
-      </section>
-  
-      <table class="elementHeader">
-        <tr>
-          <td>
-            <p class="horizontal-line"></p>
-          </td>
-          <td class="small">
-            <h1>รสชาติ</h1>
-          </td>
-          <td>
-            <p class="horizontal-line"></p>
-          </td>
-        </tr>
-        <tr>
-          <td id="elementHeader-mention" colspan="3">* สามารถเลือกสูงสุดได้ 3 ลูก! *</td>
-        </tr>
-      </table>
-  
-      <% for(var i=0; i < flavors.length; i +=4) { %>
+
+    <fieldset id="packageField">
+      <% for(var i=0; i < packages.length; i +=4) { %>
         <table>
           <tr>
             <% for (var j=0; j < 4; j++) { %>
-              <% if(i + j>= flavors.length) { %>
+
+              <% var check = 0 %>
+
+              <% if(i + j>= packages.length) { %>
                 <td></td>
                 <% continue; } %>
-                  <td class="menu-box">
+
+                <% if(packages[i+j].package_status) { %>
+                  <td class="menu-box" id="menu-box-package-<%= i+j%>">
+                    <input type="checkbox" name="package_<%= i+j+1%>" id="package-<%= i+j%>"
+                      onclick="eventCheckboxPackage(id)" />
+                    <label for="package-<%= i+j%>">
+                      <table class="inner-menu-box">
+                        <tr>
+                          <td colspan="2">
+                            <img class="section" src="<%= packages[i+j].package_pic %>" alt="" />
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="2">
+                            <a class="name">
+                              <%= packages[i+j].package_nameTH %>
+                            </a>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="2">
+                            <a class="money">
+                              <%= packages[i+j].package_price %> บาท
+                            </a>
+                          </td>
+                        </tr>
+                      </table>
+                    </label>
+                  </td>
+                  <% } else { %>
+                    <td class="menu-box-not-ready" id="menu-box-package-not-ready-<%= i+j%>">
+                      <input type="checkbox" name="package_<%= i+j+1%>" id="package-<%= i+j%>"
+                        onclick="eventCheckboxPackage(id)" />
+                      <label for="package-<%= i+j%>">
+                        <table class="inner-menu-box">
+                          <tr>
+                            <td colspan="2">
+                              <img class="section" src="<%= packages[i+j].package_pic %>" alt="" />
+                            </td>
+                          </tr>
+                          <tr>
+                            <td colspan="2">
+                              <a class="name">
+                                <%= packages[i+j].package_nameTH %>
+                              </a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td colspan="2">
+                              <a class="money">
+                                ** รายการสินค้าหมด! **
+                              </a>
+                            </td>
+                          </tr>
+                        </table>
+                      </label>
+                    </td>
+                  <% } %>
+
+                  <% if(j < 3) { %>
+                    <td id="split-box"></td>
+                    <% continue; } %>
+                <% } %>
+          </tr>
+        </table>
+        <% } %>
+    </fieldset>
+
+    <section id="flavorPart">
+      adad
+    </section>
+
+    <table class="elementHeader">
+      <tr>
+        <td>
+          <p class="horizontal-line"></p>
+        </td>
+        <td class="small">
+          <h1>รสชาติ</h1>
+        </td>
+        <td>
+          <p class="horizontal-line"></p>
+        </td>
+      </tr>
+      <tr>
+        <td id="elementHeader-mention" colspan="3">* เลือกไอศกรีมของคุณได้ 0 - 3 ลูก! *</td>
+      </tr>
+    </table>
+
+   <fieldset id="flavorFiled">
+    <% for(var i=0; i < flavors.length; i +=4) { %>
+      <table>
+        <tr>
+          <% for (var j=0; j < 4; j++) { %>
+            <% if(i + j>= flavors.length) { %>
+              <td></td>
+              <% continue; } %>
+
+              <% if(flavors[i+j].flavor_status) { %>
+
+                <td class="menu-box">
+                  <table class="inner-menu-box">
+                    <tr>
+                      <td colspan="2">
+                        <img class="section" src="<%= flavors[i+j].flavor_pic %>" alt="" />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td colspan="2">
+                        <a class="name">
+                          <%= flavors[i+j].flavor_nameTH %>
+                        </a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <a class="money">
+                          <%= flavors[i+j].flavor_price %> บาท
+                        </a>
+                      </td>
+                      <td>
+                        <button class="circle-button" type="button" id="remove-<%= i+j%>" onclick="remove(id)">
+                          -
+                        </button>
+                        <input id="field-<%= i+j%>" type="text" name="flavor_<%= i+j+1%>" value="0" readonly />
+
+                        <button class="circle-button" type="button" id="add-<%= i+j%>" onclick="add(id)">
+                          +
+                        </button>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+
+                <% } else { %>
+
+                  <td class="menu-box-not-ready">
                     <table class="inner-menu-box">
                       <tr>
                         <td colspan="2">
@@ -90,55 +241,50 @@
                         </td>
                       </tr>
                       <tr>
-                        <td>
+                        <td colspan="2">
                           <a class="money">
-                            <%= flavors[i+j].flavor_price %> บาท
+                            ** รายการสินค้าหมด! **
                           </a>
-                        </td>
-                        <td>
-                          <button class="circle-button" type="button" id="remove-<%= i+j%>" onclick="remove(id)">
-                            -
-                          </button>
-                          <input id="field-<%= i+j%>" name="flavor_<%= i+j+1%>" value="0" readonly />
-  
-                          <button class="circle-button" type="button" id="add-<%= i+j%>" onclick="add(id)">
-                            +
-                          </button>
+                          <input id="field-<%= i+j%>" type="hidden" name="flavor_<%= i+j+1%>" value="0" readonly />
                         </td>
                       </tr>
                     </table>
                   </td>
-                  <% if(j < 3) { %>
-                    <td id="split-box"></td>
-                    <% continue; } %>
-                      <% } %>
+
+                <% } %>
+
+                <% if(j < 3) { %>
+                  <td id="split-box"></td>
+                  <% continue; } %>
+                    <% } %>
+        </tr>
+      </table>
+      <% } %>
+   </fieldset>
+
+        <!-- Fetching Toppings Tables Partition -->
+
+        <section id="toppingPart">
+          adasd
+        </section>
+
+        <table class="elementHeader">
+          <tr>
+            <td>
+              <p class="horizontal-line"></p>
+            </td>
+            <td class="small">
+              <h1>ท็อปปิ้ง</h1>
+            </td>
+            <td>
+              <p class="horizontal-line"></p>
+            </td>
+          </tr>
+          <tr>
+            <td id="elementHeader-mention" colspan="3">* คุณสามารถเลือกท็อปปิ้งได้ 0 - 3 อย่าง! *</td>
           </tr>
         </table>
-        <% } %>
-  
-          <!-- Fetching Toppings Tables Partition -->
-  
-          <section id="toppingPart">
-            adasd
-          </section>
-  
-          <table class="elementHeader">
-            <tr>
-              <td>
-                <p class="horizontal-line"></p>
-              </td>
-              <td class="small">
-                <h1>ท็อปปิ้ง</h1>
-              </td>
-              <td>
-                <p class="horizontal-line"></p>
-              </td>
-            </tr>
-            <tr>
-              <td id="elementHeader-mention" colspan="3">* สามารถเลือกได้สูงสุด 3 ท็อปปิ้ง! *</td>
-            </tr>
-          </table>
-  
+
           <% for(var i=0; i < toppings.length; i +=4) { %>
             <table>
               <tr>
@@ -146,6 +292,8 @@
                   <% if(i + j>= toppings.length) { %>
                     <td></td>
                     <% continue; } %>
+
+                    <% if(toppings[i+j].topping_status) { %>
   
                       <td class="menu-box" id="menu-box-topping-<%= i+j%>">
                         <input type="checkbox" name="topping_<%= i+j+1%>" id="topping-<%= i+j%>"
@@ -167,13 +315,45 @@
                             <tr>
                               <td colspan="2">
                                 <a class="money">
-                                  <%= toppings[i+j].topping_price %> บาท
+                                  <%= toppings[i+j].topping_price %> Baht
                                 </a>
                               </td>
                             </tr>
                           </table>
                         </label>
                       </td>
+
+                      <% } else { %>
+                      
+                        <td class="menu-box-not-ready" id="menu-box-topping-not-ready-<%= i+j%>">
+                          <input type="checkbox" name="topping_<%= i+j+1%>" id="topping-<%= i+j%>"
+                            onclick="eventCheckboxTopping(id)" />
+                          <label for="topping-<%= i+j%>">
+                            <table class="inner-menu-box">
+                              <tr>
+                                <td colspan="2">
+                                  <img class="section" src="<%= toppings[i+j].topping_pic %>" alt="" />
+                                </td>
+                              </tr>
+                              <tr>
+                                <td colspan="2">
+                                  <a class="name">
+                                    <%= toppings[i+j].topping_nameTH %>
+                                  </a>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td colspan="2">
+                                  <a class="money">
+                                    ** รายการสินค้าหมด! **
+                                  </a>
+                                </td>
+                              </tr>
+                            </table>
+                          </label>
+                        </td>
+
+                      <% } %>
   
                       <% if(j < 3) { %>
                         <td id="split-box"></td>
@@ -182,29 +362,29 @@
               </tr>
             </table>
             <% } %>
-  
-              <!-- Fetching Sauces Tables Partition -->
-  
-              <section id="saucePart">
-                asdada
-              </section>
-              <table class="elementHeader">
-                <tr>
-                  <td>
-                    <p class="horizontal-line"></p>
-                  </td>
-                  <td class="small">
-                    <h1>ซอส</h1>
-                  </td>
-                  <td>
-                    <p class="horizontal-line"></p>
-                  </td>
-                </tr>
-                <tr>
-                  <td id="elementHeader-mention" colspan="3">* สามารถเลือกได้สูงสุด 3 ซอส! *</td>
-                </tr>
-              </table>
-  
+
+            <!-- Fetching Sauces Tables Partition -->
+
+            <section id="saucePart">
+              asdada
+            </section>
+            <table class="elementHeader">
+              <tr>
+                <td>
+                  <p class="horizontal-line"></p>
+                </td>
+                <td class="small">
+                  <h1>ซอส</h1>
+                </td>
+                <td>
+                  <p class="horizontal-line"></p>
+                </td>
+              </tr>
+              <tr>
+                <td id="elementHeader-mention" colspan="3">* คุณสามารถเลือกซอสได้ 0 - 2 อย่าง! *</td>
+              </tr>
+            </table>
+
               <% for(var i=0; i < sauces.length; i +=4) { %>
                 <table>
                   <tr>
@@ -212,6 +392,8 @@
                       <% if(i + j>= sauces.length) { %>
                         <td></td>
                         <% continue; } %>
+
+                        <% if(sauces[i+j].sauce_status) { %>
   
                           <td class="menu-box" id="menu-box-sauce-<%= i+j%>">
                             <input type="checkbox" name="sauce_<%= i+j+1%>" id="sauce-<%= i+j%>"
@@ -240,6 +422,36 @@
                               </table>
                             </label>
                           </td>
+
+                          <% } else { %>
+                            <td class="menu-box-not-ready" id="menu-box-sauce-not-ready-<%= i+j%>">
+                              <input type="checkbox" name="sauce_<%= i+j+1%>" id="sauce-<%= i+j%>"
+                                onclick="eventCheckboxSauce(id)" />
+                              <label for="sauce-<%= i+j%>">
+                                <table class="inner-menu-box">
+                                  <tr>
+                                    <td colspan="2">
+                                      <img class="section" src="<%= sauces[i+j].sauce_pic %>" alt="" />
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td colspan="2">
+                                      <a class="name">
+                                        <%= sauces[i+j].sauce_nameTH %>
+                                      </a>
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td colspan="2">
+                                      <a class="money">
+                                        ** รายการสินค้าหมด! **
+                                      </a>
+                                    </td>
+                                  </tr>
+                                </table>
+                              </label>
+                            </td>
+                          <% } %>
   
                           <% if(j < 3) { %>
                             <td id="split-box"></td>
@@ -248,81 +460,16 @@
                   </tr>
                 </table>
                 <% } %>
-  
-                  <!-- Fetching Packages Tables Partition -->
-  
-                  <section id="packagePart">
-                    adasd
-                  </section>
-                  <table class="elementHeader">
-                    <tr>
-                      <td>
-                        <p class="horizontal-line"></p>
-                      </td>
-                      <td class="small">
-                        <h1>บรรจุภัณฑ์</h1>
-                      </td>
-                      <td>
-                        <p class="horizontal-line"></p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td id="elementHeader-mention" colspan="3">* สามารถเลือกได้ 1 บรรจุภัณฑ์! *</td>
-                    </tr>
-                  </table>
-  
-                  <% for(var i=0; i < packages.length; i +=4) { %>
-                    <table>
-                      <tr>
-                        <% for (var j=0; j < 4; j++) { %>
-                          <% if(i + j>= packages.length) { %>
-                            <td></td>
-                            <% continue; } %>
-  
-                              <td class="menu-box" id="menu-box-package-<%= i+j%>">
-                                <input type="checkbox" name="package_<%= i+j+1%>" id="package-<%= i+j%>"
-                                  onclick="eventCheckboxPackage(id)" />
-                                <label for="package-<%= i+j%>">
-                                  <table class="inner-menu-box">
-                                    <tr>
-                                      <td colspan="2">
-                                        <img class="section" src="<%= packages[i+j].package_pic %>" alt="" />
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                      <td colspan="2">
-                                        <a class="name">
-                                          <%= packages[i+j].package_nameTH %>
-                                        </a>
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                      <td colspan="2">
-                                        <a class="money">
-                                          <%= packages[i+j].package_price %> บาท
-                                        </a>
-                                      </td>
-                                    </tr>
-                                  </table>
-                                </label>
-                              </td>
-  
-                              <% if(j < 3) { %>
-                                <td id="split-box"></td>
-                                <% continue; } %>
-                                  <% } %>
-                      </tr>
-                    </table>
-                    <% } %>
-  
-                      <div id="submit-button">
-                        <button class="submit-button" type="submit" style="vertical-align:middle">
-                          ใส่ตระกร้า
-                        </button>
-                      </div>
-    </form>
-  </body>
 
-  <script src="/javascripts/th/order.js"></script>
+
+                    <div id="submit-button">
+                      <button class="submit-button" type="submit" onclick="selectedCheck()" style="vertical-align:middle">
+                        ใส่ตระกร้า
+                      </button>
+                    </div>
+  </form>
+</body>
+
+<script src="/javascripts/th/order.js"></script>
 
 </html>

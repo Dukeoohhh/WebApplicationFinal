@@ -5,6 +5,38 @@ document.querySelectorAll('.menu-box').forEach(checkbox => {
     });
 });
 
+function selectedCheck(){
+    document.getElementById('orderForm').addEventListener('submit', function(event) {
+        var fieldsets = document.querySelectorAll('fieldset');
+        var checkboxFilled = false;
+        var textFilled = false;
+    
+        fieldsets.forEach(function(fieldset) {
+          var checkboxesInSection = fieldset.querySelectorAll('input[type="checkbox"]');
+          var textInSection = fieldset.querySelectorAll('input[type="text"]');
+
+          checkboxesInSection.forEach(function(checkbox) {
+            if (checkbox.checked) {
+                checkboxFilled = true;
+            }
+          });
+
+          textInSection.forEach(function(checkbox) {
+            if (checkbox.value.trim() !== '0') {
+                textFilled = true;
+            }
+          });
+        });
+
+        if(!checkboxFilled || !textFilled){
+            event.preventDefault();
+            let popup = document.getElementById('popAlert');
+            popup.classList.add('active');
+            // alert("Please choose your Flavors and Package.");
+        }
+    });
+}
+
 // Store the IDs of active checkboxes Topping
 var activeCheckboxesTopping= [];
 
@@ -13,6 +45,11 @@ function eventCheckboxTopping(topping_id) {
     let num = topping_id.slice(8);
     let menu_box = "menu-box-topping-" + num;
     const td = document.getElementById(menu_box);
+
+    if(!td){
+        checkbox.checked = false;
+        return;
+    }
 
     // If the checkbox is already checked and the limit is reached, prevent activation
     if (checkbox.checked && activeCheckboxesTopping.length >= 3) {
@@ -56,6 +93,11 @@ function eventCheckboxSauce(sauce_id) {
     let menu_box = "menu-box-sauce-" + num;
     const td = document.getElementById(menu_box);
 
+    if(!td){
+        checkbox.checked = false;
+        return;
+    }
+
     // If the checkbox is already checked and the limit is reached, prevent activation
     if (checkbox.checked && activeCheckboxesSauce.length >= 2) {
         checkbox.checked = false;
@@ -97,6 +139,11 @@ function eventCheckboxPackage(package_id) {
     let num = package_id.slice(8);
     let menu_box = "menu-box-package-" + num;
     const td = document.getElementById(menu_box);
+
+    if(!td){
+        checkbox.checked = false;
+        return;
+    }
 
     // If the checkbox is already checked and the limit is reached, prevent activation
     if (checkbox.checked && activeCheckboxesPackage.length >= 1) {
@@ -180,3 +227,8 @@ function remove(id) {
 }
 
 /***************************************************************************************************************/
+
+function togglePop() {
+    let popup = document.getElementById('popAlert');
+    popup.classList.remove('active');
+}
