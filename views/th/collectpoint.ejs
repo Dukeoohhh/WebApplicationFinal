@@ -13,6 +13,8 @@
         <a href="/en/order/collectpoint" id="lang" >TH</a>
       </div>
 
+      <div class="background"></div>
+
     <table id="nav">
       <tr>
           <td>
@@ -21,49 +23,58 @@
       </tr>
     </table>
     <div id="tel-input">
+
+    <form action="/th/order/submit" method="post">
+
     <table id="calcu"> 
         <tr> 
             <td colspan="3"> 
-                <input value="" type="text" id="result" placeholder="Your phone num" readonly> 
+                <input value="" type="text" id="result" name="tel_num" placeholder="Your phone num" readonly> 
             </td> 
         </tr> 
         
         <tr> 
-            <td><input id="num1" type="button" value="1" onclick="getTelNum(id)"></td> 
-            <td><input id="num2" type="button" value="2" onclick="getTelNum(id)"></td> 
-            <td><input id="num3" type="button" value="3" onclick="getTelNum(id)"></td> 
+            <td><input id="num1" type="button" value="1" onclick="getTelNum(id)" readonly></td> 
+            <td><input id="num2" type="button" value="2" onclick="getTelNum(id)" readonly></td> 
+            <td><input id="num3" type="button" value="3" onclick="getTelNum(id)" readonly></td> 
         </tr> 
         <tr> 
-            <td><input id="num4" type="button" value="4" onclick="getTelNum(id)"></td> 
-            <td><input id="num5" type="button" value="5" onclick="getTelNum(id)"></td> 
-            <td><input id="num6" type="button" value="6" onclick="getTelNum(id)"></td> 
+            <td><input id="num4" type="button" value="4" onclick="getTelNum(id)" readonly></td> 
+            <td><input id="num5" type="button" value="5" onclick="getTelNum(id)" readonly></td> 
+            <td><input id="num6" type="button" value="6" onclick="getTelNum(id)" readonly></td> 
         </tr> 
         <tr> 
-            <td><input id="num7" type="button" value="7" onclick="getTelNum(id)"></td> 
-            <td><input id="num8" type="button" value="8" onclick="getTelNum(id)"></td> 
-            <td><input id="num9" type="button" value="9" onclick="getTelNum(id)"></td> 
+            <td><input id="num7" type="button" value="7" onclick="getTelNum(id)" readonly></td> 
+            <td><input id="num8" type="button" value="8" onclick="getTelNum(id)" readonly></td> 
+            <td><input id="num9" type="button" value="9" onclick="getTelNum(id)" readonly></td> 
         </tr> 
         <tr> 
             <td></td>
-            <td><input id="num0" type="button" value="0" onclick="getTelNum(id)"></td> 
-            <td><input id="delete" type="button" value="<" onclick="getTelNum(id)"></td> 
+            <td><input id="num0" type="button" value="0" onclick="getTelNum(id)" readonly></td> 
+            <td><input id="delete" type="button" value="<" onclick="getTelNum(id)" readonly></td> 
         </tr> 
     </table> 
 </div>
 
 <table>
     <tr>
-        <td class="back"><button class="button" type="button" onclick="backToPrevious()" style="vertical-align:middle">
-        ย้อนกลับ
-        </button></td>
-        <td><button class="button" type="button" style="vertical-align:middle">
-        ยกเลิก
-        </button></td>
-        <td class="next"><button class="button" type="button" style="vertical-align:middle">
-        ยืนยัน
-        </button></td>
+        <td class="back">
+            <button class="button" type="submit" style="vertical-align:middle">
+                ข้าม
+            </button>
+        </td>
+        <td>
+            <!-- <button class="button" type="button" style="vertical-align:middle">
+                SKIP
+            </button></td> -->
+        <td class="next">
+            <button class="button" type="submit" style="vertical-align:middle">
+            ยืนยัน
+            </button>
+        </td>
     </tr>
 </table>
+</form>
 
 </body>
 

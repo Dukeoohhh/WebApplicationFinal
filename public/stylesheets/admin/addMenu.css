@@ -1,0 +1,223 @@
+body {
+    background-color: #f6eddd;
+    padding-left: 0%;
+    padding-right: 0%;
+    margin-top: 0%;
+    margin-left: 0%;
+    margin-right: 0%;
+}
+
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("../../images/bg/background.png");
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  animation: fade-in-bg 1s ease-in;
+  z-index: -1;
+}
+
+a:link,
+a:visited {
+  text-decoration: none;
+  color: white;
+}
+
+#logo {
+    padding-top: 0.5%;
+    width: 10%;
+    height: auto;
+    padding-left: 3%;
+}
+
+#section-nav{
+    padding: 3%;
+    border-radius: 70px 70px 70px 70px;
+    font-size: 1.5vw;
+    text-align: center;
+    /* border: 1px solid white; */
+    background: #986c4a;
+}
+
+#table-nav{
+    padding-top: 0%;
+    margin-top: 0%;
+    text-align: center;
+}
+
+#table-nav td{
+    /* border: 1px solid black; */
+    text-align: center;
+    padding-top: 4%;
+}
+
+a#section-nav.mainPage{
+    color: rgb(255, 220, 106);
+    text-align: center;
+}
+
+div.header-container{
+    background-color: #b7a17e;
+    width: 100%;
+    height: 120px;
+    margin-bottom: 2%;
+    position: -webkit-sticky;
+    position: sticky;
+    z-index: 2;
+}
+  
+div.header-container a #logo{
+    float: left;
+}
+  
+div.header-container a #lang{
+    width: 200px;
+    height: auto;
+    float: right;
+}
+
+tr,
+td {
+    /* border: 1px solid black; */
+    font-weight: bold;
+    font-family: 'BaskervilleDisplayPTRegular', serif;
+    
+}
+
+table {
+    /* background-color: #c5b397;  */
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+    table-layout: fixed;
+    margin-top: 1%;
+    text-align: center;
+}
+
+h1{
+    font-size: 3.0vw;
+}
+
+table.table-nav {
+    /* border: 1px solid black; */
+    padding-top: 2%;
+    margin-top: 0%;
+    width: 50%;
+    font-weight: bold;
+  }
+  
+  table.table-nav td {
+      padding: 1%;
+      border-radius: 70px 70px 70px 70px;
+      font-size: 1.5vw;
+      border: 1px solid white;
+      background: #986c4a;
+  }
+
+.summary {
+    padding: 1%;
+    text-align: left;
+    width: 60%;
+    font-size: 1.4vw;
+    border-radius: 20px 20px 20px 20px;
+    font-family: 'BaskervilleDisplayPTRegular', serif;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+
+.small{
+    margin-top: 0%;
+    padding-top: 0%;
+    width: 13%;
+}
+
+.medium {
+    width: 25%;
+}
+
+#type{
+    padding-left: 3%;
+    font-size: 1.2vw;
+    margin-top: 0%;
+    padding-top: 0%;
+}
+
+#detail{
+    padding-left: 5%;
+    font-size: 1.0vw;
+}
+
+#q{
+    padding-left: 2%;
+    font-size: 1vw;
+}
+
+#count{
+    font-size: 1.0vw;
+}
+
+table.noOrder{
+    /* border: 1px solid black; */
+    text-align: center;
+    width: 70%;
+    background-color: rgb(255, 255, 255);
+    border-radius: 50px 50px 50px 50px;
+}
+
+.horizontal-line {
+    border: none;
+    border-top: 2.5px solid #737373;
+    margin: 1% auto;
+    width: 90%;
+}
+
+.button {
+    background-color: rgb(255, 255, 255);
+    border: none;
+    color: #5b5247;
+    width: 40%;
+    padding: 10px 55px;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    margin-right: 3%;
+    text-align: center;
+    text-decoration: none;
+    font-family: 'BaskervilleDisplayPTRegular', serif;
+    border-radius: 25px;
+    cursor: pointer;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    font-weight: bold;
+    font-size: 0.8vw;
+}
+
+.button-active{
+    background-color: rgb(168, 255, 127);
+    border: none;
+    color: #5b5247;
+    width: 40%;
+    padding: 10px 55px;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    margin-right: 3%;
+    text-align: center;
+    text-decoration: none;
+    font-family: 'BaskervilleDisplayPTRegular', serif;
+    border-radius: 25px;
+    cursor: pointer;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    font-weight: bold;
+    font-size: 0.8vw;
+}
+
+#confirm{
+    text-align: right;
+}
+
+#buy-more{
+    text-align: right;
+}
+

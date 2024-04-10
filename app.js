@@ -6,6 +6,7 @@ var logger = require('morgan');
 const session = require('express-session');
 
 var indexRouter = require('./routes/index');
+var administratorRouter = require('./routes/administrator');
 var enRouter = require('./routes/en');
 var thRouter = require('./routes/th');
 
@@ -28,6 +29,7 @@ app.use(session({
 }));
 
 app.use('/', indexRouter);
+app.use('/administrator', administratorRouter);
 app.use('/en', enRouter);
 app.use('/th', thRouter);
 

@@ -40,3 +40,7 @@ function backToPayment(){
 function backToPrevious(){
     window.history.back();
 }
+
+function goToCollectPoint(){
+    window.location.href = "/en/order/collectpoint";
+}

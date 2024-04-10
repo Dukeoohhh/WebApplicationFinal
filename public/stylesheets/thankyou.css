@@ -1,0 +1,143 @@
+body {
+    background-color: #f6eddd;
+    padding-left: 0%;
+    padding-right: 0%;
+    margin-top: 0%;
+    margin-left: 0%;
+    margin-right: 0%;
+}
+  
+  /* Define keyframes */
+  @keyframes slide-in-button {
+    0% {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+  
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes fade-in-bg {
+    0% {
+      opacity: 0%;
+    }
+  
+    100% {
+      opacity: 80%;
+    }
+  }
+  
+  .background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('../images/bg/thankyou.png');
+      background-position: center center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      animation: fade-in-bg 1s ease-in;
+  }
+  
+  .container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    tr,
+    td {
+        /* border: 1px solid black; */
+        text-align: center;
+        font-weight: bold;
+        font-family: 'BaskervilleDisplayPTRegular', serif;
+        padding-bottom: 1%;
+    }
+    
+    table {
+        /*background-color: #c5b397;  */
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+        align-items: center;
+        width: 90%;
+        table-layout: fixed;
+        margin-top: 42%;
+    }
+    p{
+      font-size: 2vw;
+      color: #5c402b;
+    }
+    .c-button {
+      color: #986C4A;
+      font-weight: 700;
+      font-size: 16px;
+      text-decoration: none;
+      padding: 0.9em 1.6em;
+      cursor: pointer;
+      display: inline-block;
+      vertical-align: middle;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .c-button--gooey {
+      color: #5c402b;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      border: 4px solid #986C4A;
+      border-radius: 0;
+      position: relative;
+      transition: all 700ms ease;
+    }
+    
+    .c-button--gooey .c-button__blobs {
+      height: 100%;
+      filter: url(#goo);
+      overflow: hidden;
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: -3px;
+      right: -1px;
+      z-index: -1;
+    }
+    
+    .c-button--gooey .c-button__blobs div {
+      background-color: #986C4A;
+      width: 34%;
+      height: 100%;
+      border-radius: 100%;
+      position: absolute;
+      transform: scale(1.4) translateY(125%) translateZ(0);
+      transition: all 700ms ease;
+    }
+    
+    .c-button--gooey .c-button__blobs div:nth-child(1) {
+      left: -5%;
+    }
+    
+    .c-button--gooey .c-button__blobs div:nth-child(2) {
+      left: 30%;
+      transition-delay: 60ms;
+    }
+    
+    .c-button--gooey .c-button__blobs div:nth-child(3) {
+      left: 66%;
+      transition-delay: 25ms;
+    }
+    
+    .c-button--gooey:hover {
+      color: #fff;
+    }
+    
+    .c-button--gooey:hover .c-button__blobs div {
+      transform: scale(1.4) translateY(0) translateZ(0);
+    }

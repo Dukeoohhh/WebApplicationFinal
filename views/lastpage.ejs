@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+        <%= title %>
+    </title>
+    <link rel="stylesheet" href="\stylesheets\lastpage.css" type="text/css" />
+</head>
+
+<body>
+    <div class="header-container">
+        <a href="/en"><img id="logo" src="/images/home/LOGO-white.png" alt="" /></a>
+    </div>
+
+    <div class="background"></div>
+
+    <table>
+        <tr>
+            <td class="section">
+                <img class="pic" src="\images\bg\check.png" alt="">
+            </td>
+        </tr>
+    </table>
+    <table class="success">
+        <tr>
+            <td class="menu-box">
+                <table class="inner-menu-box">
+                    <tr>
+                        <td>
+                            Order Confirm!
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Queue
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="queue">
+                            <%= orderID %>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+    <form action="/en/order/success" method="post">
+        <button id="next" class="button" type="submit" style="vertical-align:middle">
+            OK
+        </button>
+    </form>
+</body>
+
+<script src="/javascripts/lastpage.js"></script>
+
+</html>

@@ -41,3 +41,6 @@ function backToPrevious(){
     window.history.back();
 }
 
+function goToCollectPoint(){
+    window.location.href = "/th/order/collectpoint";
+}

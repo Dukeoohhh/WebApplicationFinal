@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+    <link rel="stylesheet" href="\stylesheets\admin\stock.css" type="text/css" />
+  </head>
+
+  <body>
+
+    <div class="background"></div>
+
+    <div class="header-container">
+        <a><img id="logo" src="/images/home/LOGO-white.png" alt="" /></a>
+        <table class="table-nav">
+            <tr>
+                <td><a href="order" id="section-nav">Order Manage</a></td>
+                <td><a href="stock" class="mainPage"  id="section-nav">Stock Manage</a></td>
+                <td><a href="add-menu" id="section-nav">Add New Menu</a></td>
+            </tr>
+        </table>
+    </div>
+
+    <table class="elementHeader">
+      <tr>
+        <td>
+          <p class="horizontal-line"></p>
+        </td>
+        <td class="small">
+          <h1>PACKAGES</h1>
+        </td>
+        <td>
+          <p class="horizontal-line"></p>
+        </td>
+      </tr>
+    </table>
+
+    <% for(var i=0; i < packages.length; i +=4) { %>
+      <table class="list">
+        <tr>
+          <% for (var j=0; j < 4; j++) { %>
+
+            <% var check = 0 %>
+
+            <% if(i + j>= packages.length) { %>
+              <td></td>
+              <% continue; } %>
+                <td class="menu-box" id="menu-box-package-<%= i+j%>">
+                    <table class="inner-menu-box">
+                      <tr>
+                        <td colspan="2">
+                          <img class="section" src="<%= packages[i+j].package_pic %>" alt="" />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td colspan="2">
+                          <a class="name">
+                            <%= packages[i+j].package_nameEN %>
+                          </a>
+                        </td>
+                      </tr>
+                    <form action="/administrator/stock/changeStatusPackage" method="post">
+                      <input type="hidden" name="package" id="package-<%= i+j%>" value="<%= i+j+1%>"/>
+                      <% if(packages[i+j].package_status == 1) { %>
+                      <tr>
+                        <td>
+                            <button class="button-ready" name="submitBtn" type="submit" value="ready" style="vertical-align:middle">
+                                READY TO <br> SERVE
+                            </button>
+                        </td>
+                        <td>
+                          <button class="button" name="submitBtn" type="submit" value="outStock" style="vertical-align:middle">
+                              OUT OF <br> STOCK
+                          </button>
+                        </td>
+                      </tr>
+                      <% } else { %>
+                        <tr>
+                          <td>
+                              <button class="button" name="submitBtn" type="submit" value="ready" style="vertical-align:middle">
+                                  READY TO <br> SERVE
+                              </button>
+                          </td>
+                          <td>
+                            <button class="button-notReady" name="submitBtn" type="submit" value="outStock" style="vertical-align:middle">
+                                OUT OF <br> STOCK
+                            </button>
+                          </td>
+                        </tr>
+                      <% } %>
+                    </form>
+                    </table>
+
+                </td>
+
+                <% if(j < 3) { %>
+                  <td id="split-box"></td>
+                  <% continue; } %>
+              <% } %>
+        </tr>
+      </table>
+      <% } %>
+
+      <table class="elementHeader">
+        <tr>
+          <td>
+            <p class="horizontal-line"></p>
+          </td>
+          <td class="small">
+            <h1>FLAVORS</h1>
+          </td>
+          <td>
+            <p class="horizontal-line"></p>
+          </td>
+        </tr>
+      </table>
+
+      <% for(var i=0; i < flavors.length; i +=4) { %>
+        <table class="list">
+          <tr>
+            <% for (var j=0; j < 4; j++) { %>
+  
+              <% var check = 0 %>
+  
+              <% if(i + j>= flavors.length) { %>
+                <td></td>
+                <% continue; } %>
+                  <td class="menu-box" id="menu-box-flavor-<%= i+j%>">
+                      <table class="inner-menu-box">
+                        <tr>
+                          <td colspan="2">
+                            <img class="section" src="<%= flavors[i+j].flavor_pic %>" alt="" />
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="2">
+                            <a class="name">
+                              <%= flavors[i+j].flavor_nameEN %>
+                            </a>
+                          </td>
+                        </tr>
+                      <form action="/administrator/stock/changeStatusFlavor" method="post">
+                        <input type="hidden" name="flavor" id="flavor-<%= i+j%>" value="<%= i+j+1%>"/>
+                        <% if(flavors[i+j].flavor_status == 1) { %>
+                        <tr>
+                          <td>
+                              <button class="button-ready" name="submitBtn" type="submit" value="ready" style="vertical-align:middle">
+                                  READY TO <br> SERVE
+                              </button>
+                          </td>
+                          <td>
+                            <button class="button" name="submitBtn" type="submit" value="outStock" style="vertical-align:middle">
+                                OUT OF <br> STOCK
+                            </button>
+                          </td>
+                        </tr>
+                        <% } else { %>
+                          <tr>
+                            <td>
+                                <button class="button" name="submitBtn" type="submit" value="ready" style="vertical-align:middle">
+                                    READY TO <br> SERVE
+                                </button>
+                            </td>
+                            <td>
+                              <button class="button-notReady" name="submitBtn" type="submit" value="outStock" style="vertical-align:middle">
+                                  OUT OF <br> STOCK
+                              </button>
+                            </td>
+                          </tr>
+                        <% } %>
+                      </form>
+                      </table>
+  
+                  </td>
+  
+                  <% if(j < 3) { %>
+                    <td id="split-box"></td>
+                    <% continue; } %>
+                <% } %>
+          </tr>
+        </table>
+        <% } %>
+
+        <table class="elementHeader">
+          <tr>
+            <td>
+              <p class="horizontal-line"></p>
+            </td>
+            <td class="small">
+              <h1>TOPPINGS</h1>
+            </td>
+            <td>
+              <p class="horizontal-line"></p>
+            </td>
+          </tr>
+        </table>
+  
+        <% for(var i=0; i < toppings.length; i +=4) { %>
+          <table class="list">
+            <tr>
+              <% for (var j=0; j < 4; j++) { %>
+    
+                <% var check = 0 %>
+    
+                <% if(i + j>= toppings.length) { %>
+                  <td></td>
+                  <% continue; } %>
+                    <td class="menu-box" id="menu-box-topping-<%= i+j%>">
+                        <table class="inner-menu-box">
+                          <tr>
+                            <td colspan="2">
+                              <img class="section" src="<%= toppings[i+j].topping_pic %>" alt="" />
+                            </td>
+                          </tr>
+                          <tr>
+                            <td colspan="2">
+                              <a class="name">
+                                <%= toppings[i+j].topping_nameEN %>
+                              </a>
+                            </td>
+                          </tr>
+                        <form action="/administrator/stock/changeStatusTopping" method="post">
+                          <input type="hidden" name="topping" id="topping-<%= i+j%>" value="<%= i+j+1%>"/>
+                          <% if(toppings[i+j].topping_status == 1) { %>
+                          <tr>
+                            <td>
+                                <button class="button-ready" name="submitBtn" type="submit" value="ready" style="vertical-align:middle">
+                                    READY TO <br> SERVE
+                                </button>
+                            </td>
+                            <td>
+                              <button class="button" name="submitBtn" type="submit" value="outStock" style="vertical-align:middle">
+                                  OUT OF <br> STOCK
+                              </button>
+                            </td>
+                          </tr>
+                          <% } else { %>
+                            <tr>
+                              <td>
+                                  <button class="button" name="submitBtn" type="submit" value="ready" style="vertical-align:middle">
+                                      READY TO <br> SERVE
+                                  </button>
+                              </td>
+                              <td>
+                                <button class="button-notReady" name="submitBtn" type="submit" value="outStock" style="vertical-align:middle">
+                                    OUT OF <br> STOCK
+                                </button>
+                              </td>
+                            </tr>
+                          <% } %>
+                        </form>
+                        </table>
+    
+                    </td>
+    
+                    <% if(j < 3) { %>
+                      <td id="split-box"></td>
+                      <% continue; } %>
+                  <% } %>
+            </tr>
+          </table>
+          <% } %>
+
+          <table class="elementHeader">
+            <tr>
+              <td>
+                <p class="horizontal-line"></p>
+              </td>
+              <td class="small">
+                <h1>SAUCES</h1>
+              </td>
+              <td>
+                <p class="horizontal-line"></p>
+              </td>
+            </tr>
+          </table>
+    
+          <% for(var i=0; i < sauces.length; i +=4) { %>
+            <table class="list">
+              <tr>
+                <% for (var j=0; j < 4; j++) { %>
+      
+                  <% var check = 0 %>
+      
+                  <% if(i + j>= sauces.length) { %>
+                    <td></td>
+                    <% continue; } %>
+                      <td class="menu-box" id="menu-box-sauce-<%= i+j%>">
+                          <table class="inner-menu-box">
+                            <tr>
+                              <td colspan="2">
+                                <img class="section" src="<%= sauces[i+j].sauce_pic %>" alt="" />
+                              </td>
+                            </tr>
+                            <tr>
+                              <td colspan="2">
+                                <a class="name">
+                                  <%= sauces[i+j].sauce_nameEN %>
+                                </a>
+                              </td>
+                            </tr>
+                          <form action="/administrator/stock/changeStatusSauce" method="post">
+                            <input type="hidden" name="sauce" id="sauce-<%= i+j%>" value="<%= i+j+1%>"/>
+                            <% if(sauces[i+j].sauce_status == 1) { %>
+                            <tr>
+                              <td>
+                                  <button class="button-ready" name="submitBtn" type="submit" value="ready" style="vertical-align:middle">
+                                      READY TO <br> SERVE
+                                  </button>
+                              </td>
+                              <td>
+                                <button class="button" name="submitBtn" type="submit" value="outStock" style="vertical-align:middle">
+                                    OUT OF <br> STOCK
+                                </button>
+                              </td>
+                            </tr>
+                            <% } else { %>
+                              <tr>
+                                <td>
+                                    <button class="button" name="submitBtn" type="submit" value="ready" style="vertical-align:middle">
+                                        READY TO <br> SERVE
+                                    </button>
+                                </td>
+                                <td>
+                                  <button class="button-notReady" name="submitBtn" type="submit" value="outStock" style="vertical-align:middle">
+                                      OUT OF <br> STOCK
+                                  </button>
+                                </td>
+                              </tr>
+                            <% } %>
+                          </form>
+                          </table>
+      
+                      </td>
+      
+                      <% if(j < 3) { %>
+                        <td id="split-box"></td>
+                        <% continue; } %>
+                    <% } %>
+              </tr>
+            </table>
+            <% } %>
+
+</body>
+
+  <script src="\javascripts\admin\stock.js"></script>
+
+</html>

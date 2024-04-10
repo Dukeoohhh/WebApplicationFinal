@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+    <link rel="stylesheet" href="\stylesheets\admin\order.css" type="text/css" />
+  </head>
+
+  <body>
+
+    <div class="background"></div>
+
+    <div class="header-container">
+        <a><img id="logo" src="/images/home/LOGO-white.png" alt="" /></a>
+        <table class="table-nav">
+            <tr>
+                <td><a href="order" class="mainPage"  id="section-nav">Order Manage</a></td>
+                <td><a href="stock" id="section-nav">Stock Manage</a></td>
+                <td><a href="add-menu" id="section-nav">Add New Menu</a></td>
+            </tr>
+        </table>
+    </div>
+
+    <% if(totalQueue.length == 0) { %>
+        <table class="noOrder">
+            <tr>
+                <td><p class="horizontal-line"></p></td>
+                <td><h1>No Order Income</h1></td>
+                <td><p class="horizontal-line"></p></td>
+            </tr>
+        </table>
+    <% } %>
+
+    <% for(var queue = 0; queue < totalQueue.length; queue++ ) { %>
+
+        <% var queueData = totalQueue[queue] %>
+
+        <table class="summary">
+            <tr>
+                <td class="small">ORDER: #<%= (queue+1) %></td>
+                <td></td>
+                <td id="confirm">
+                    <button class="button" type="button" id="paidButton_<%= queue %>" onclick="paid(id)" style="vertical-align:middle">
+                        PAID
+                    </button>
+                    <form action="/administrator/order/served" method="post">
+                        <input type="hidden" name="deleteIndex" value="<%= queue+1 %>">
+                        <button class="button" type="submit" style="vertical-align:middle">
+                            SERVED
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3"><p class="horizontal-line"></p></td>
+            </tr>
+
+            <% for(var i = 0; i < queueData.length; i++) { %>
+
+            <tr>
+                <td class="small" id="q">#<%= (i+1) %></td>
+                <td id="type">Package</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+
+                <% for(var j = 0; j < packages.length; j++) { %>
+
+                    <% var packageIndex = 'package_' + (j+1) %>
+            
+                    <% if(queueData[i][packageIndex] === "on") { %>
+
+                        <td colspan="1" id="detail"><p>> <%= packages[j].package_nameEN %></p></td>
+                        
+                    <% } %>
+            
+                  <% } %>
+            </tr>
+            <tr>
+                <td></td>
+                <td colspan="2" id="type">Flavor</td>
+            </tr>
+                <% for(var j = 0; j < flavors.length; j++) { %>
+
+                    <% var flavorIndex = 'flavor_' + (j+1) %>
+              
+                    <% if(queueData[i][flavorIndex] != 0) { %>
+                      <tr>
+                        <td></td>
+                        <td id="detail"><p>> <%= flavors[j].flavor_nameEN %></p></td>
+                        <td colspan="1" class="medium" id="count"><p>x <%= queueData[i][flavorIndex] %></p></td>
+                      </tr>
+                     <% } %>
+              
+                  <% } %>
+            <tr>
+                <td></td>
+                <td colspan="2" id="type">Topping</td>
+            </tr>
+            <tr>
+              <% var toppingList = "> " 
+
+                 for(var j = 0; j < toppings.length; j++) { 
+
+                    var toppingIndex = 'topping_' + (j+1) 
+                    
+            
+                    if(queueData[i][toppingIndex] === "on") { 
+                        toppingList = toppingList.concat(toppings[j].topping_nameEN, " | ");
+                     } 
+            
+                }
+                %>
+
+                <td></td>
+                <td colspan="2" id="detail"><p><%= toppingList %></p></td>
+            </tr>
+            </tr>
+            <tr>
+                <td></td>
+                <td colspan="2" id="type">Sauce</td>
+            </tr>
+            <tr>
+
+                <% var sauceList = "> " 
+
+                 for(var j = 0; j < sauces.length; j++) { 
+
+                    var sauceIndex = 'sauce_' + (j+1) 
+                    
+            
+                    if(queueData[i][sauceIndex] === "on") { 
+                        sauceList = sauceList.concat(sauces[j].sauce_nameEN, " | ");
+                     } 
+            
+                }
+                %>
+
+                <td></td>
+                <td colspan="2" id="detail"><p><%= sauceList %></p></td>
+            </tr>
+            <tr>
+                <td colspan="3"><p class="horizontal-line"></p></td>
+            </tr>
+
+            <% } %>
+
+            <tr>
+                <td></td>
+                <td>PRICE : <%= totalQueuePay[queue].totalPrice %></td>
+                <td>PAYMENT METHOD: <%= totalQueueMethod[queue]%></td>
+            </tr>
+        </table>
+
+    <% } %>
+
+</body>
+
+  <script src="\javascripts\admin\order.js"></script>
+
+</html>
