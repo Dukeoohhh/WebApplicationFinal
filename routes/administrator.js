@@ -5,7 +5,7 @@ const session = require("express-session");
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('admin/login', { title: 'Fat in Peace' });
+  res.render('admin/login', { title: 'Fat in Peace Administrator' });
 });
 
 router.get('/order', function(req, res, next) {
@@ -50,7 +50,7 @@ router.get('/order', function(req, res, next) {
 
           // Render the EJS template with the query results
           res.render("admin/order", {
-            title: "Administrator",
+            title: "Fat in Peace Administrator",
             flavors: flavor_result,
             toppings: topping_result,
             sauces: sauce_result,
@@ -120,7 +120,7 @@ router.get('/stock', function(req, res, next) {
 
           // Render the EJS template with the query results
           res.render("admin/stock", {
-            title: "Fat in Peace",
+            title: "Fat in Peace Administrator",
             flavors: flavor_result,
             toppings: topping_result,
             sauces: sauce_result,
@@ -229,7 +229,7 @@ router.post("/stock/changeStatusSauce", (req, res) => {
 });
 
 router.get('/add-menu', function(req, res, next) {
-  res.render('admin/addMenu', { title: 'Fat in Peace' });
+  res.render('admin/addMenu', { title: 'Fat in Peace Administrator' });
 });
 
 

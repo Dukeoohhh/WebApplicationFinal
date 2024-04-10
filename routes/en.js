@@ -5,7 +5,7 @@ const session = require("express-session");
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
-  res.render("en/home", { title: "Fat in Peace EN" });
+  res.render("en/home", { title: "Fat in peace" });
 });
 
 router.get("/order", function (req, res, next) {
@@ -44,7 +44,7 @@ router.get("/order", function (req, res, next) {
 
           // Render the EJS template with the query results
           res.render("en/order", {
-            title: "Fat in Peace EN",
+            title: "Fat in peace",
             flavors: flavor_result,
             toppings: topping_result,
             sauces: sauce_result,
@@ -113,7 +113,7 @@ router.get("/order/cart", (req, res) => {
 
           // Render the EJS template with the query results
           res.render("en/cart", {
-            title: "Cart",
+            title: "Fat in peace",
             flavors: flavor_result,
             toppings: topping_result,
             sauces: sauce_result,
@@ -160,7 +160,7 @@ router.post("/order/cart/confirm-order", (req, res) => {
 });
 
 router.get("/order/payment", (req, res) => {
-  res.render("en/payment", { title: "Payment" });
+  res.render("en/payment", { title: "Fat in peace" });
 });
 
 router.get("/order/payment/cash", (req, res) => {
@@ -168,7 +168,7 @@ router.get("/order/payment/cash", (req, res) => {
   req.session.method = "Cash";
 
   res.render("en/paymentList/cash", {
-    title: "Pay with cash",
+    title: "Fat in peace",
     totalPay: totalPay,
   });
 });
@@ -178,7 +178,7 @@ router.get("/order/payment/qrcode", (req, res) => {
   req.session.method = "qrCode";
 
   res.render("en/paymentList/qrcode", {
-    title: "Pay with qrcode",
+    title: "Fat in peace",
     totalPay: totalPay,
   });
 });
@@ -188,7 +188,7 @@ router.get("/order/payment/point", (req, res) => {
   req.session.method = "Point";
 
   res.render("en/paymentList/point", {
-    title: "Pay with point",
+    title: "Fat in peace",
     totalPay: totalPay,
   });
 });
@@ -197,7 +197,7 @@ router.get("/order/collectpoint", (req, res) => {
   const totalPay = req.session.totalPay;
 
   res.render("en/collectpoint", {
-    title: "Collecting point",
+    title: "Fat in peace",
     totalPay: totalPay,
   });
 });
