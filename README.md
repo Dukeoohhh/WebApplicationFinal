@@ -17,7 +17,7 @@ Mockup kiosk system to manage customer side and store side.
 
 - Install Node JS and Git
 
-- Create folder "icecream_shop" into Desktop
+- Create folder "icecream_shop" into Desktop on Command Prompt
 
 ```bash
 cd desktop
