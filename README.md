@@ -36,6 +36,8 @@ git clone https://github.com/Dukeoohhh/WebApplicationFinal.git
 - Install npm
 
 ```bash
+cd WebApplicationFinal
+
 npm install
 
 npm audit fix --force
