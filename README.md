@@ -33,7 +33,7 @@ cd icecream_shop
 git clone https://github.com/Dukeoohhh/WebApplicationFinal.git
 ```
 
-- Install npm
+- Install npm in WebApplicationFinal directory
 
 ```bash
 cd WebApplicationFinal
